@@ -75,3 +75,33 @@ no need to pass anythings
     ]
 }
 ```
+
+## Service Type
+`POST /serviceTyps`
+### Header
+```json
+{
+    "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVhNWY4NmIxOTdmYjU4N2NjYzJhMzhiZiIsInVzZXJuYW1lIjoic3V..."
+}
+```
+### Request
+no need to pass anythings
+### Return Sample
+```json
+[
+    {
+        "type" : "TUR",
+        "name" : {
+            "en" : "Tour",
+            "zh" : "旅行"
+        }
+    },
+    {
+        "type" : "TIC",
+        "name" : {
+            "en" : "Ticket",
+            "zh" : "門票"
+        }
+    }
+]
+```
