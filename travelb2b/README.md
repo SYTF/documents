@@ -1,7 +1,7 @@
 # API Document
 
 ## API endpoint
-`http://dev.travelwebsite.com/api/`
+`https://dev.travelwebsite.com/api/`
 
 ## Authorization
 `POST /auth/login`
