@@ -77,7 +77,7 @@ no need to pass anythings
 ```
 
 ## Service Type
-`POST /serviceTyps`
+`POST /serviceTypes`
 ### Header
 ```json
 {
@@ -119,7 +119,8 @@ no need to pass anythings
 | ------------- | ------------- | ------------- |
 |startDate|Start day of current month|Optional. Date for filtering the packages|
 |endDate|End day of current month|Optional. Date for filtering the packages|
-|country|empty|Optional. Filter packages by country code|
+|country|empty|Optional. Filter packages by country code. Please ref. to the country list API.|
+|type|empty|Optional. Filter packages by service type. Please ref. to the service type API.|
 |page|1|Optional. For switching pages|
 |perPage|10|Optional. Control the number of returning items|
 ### Return Sample
@@ -165,5 +166,14 @@ no need to pass anythings
             }
         }, {...}
     ]
+}
+```
+
+## Get Specific Product
+`POST /agent/package/:packageID`
+### Header
+```json
+{
+    "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVhNWY4NmIxOTdmYjU4N2NjYzJhMzhiZiIsInVzZXJuYW1lIjoic3V..."
 }
 ```
