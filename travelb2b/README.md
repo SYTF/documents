@@ -1,5 +1,12 @@
 # API Document
 
+## Table of Content
+- [API Endpoint](#api-endpoint)
+- [Request Sample](#request-sample)
+- [Authenication](#authentication)
+	- [Receiving an access token](#receiving-an-access-token)
+	- [Token Validation](#token-validation)
+
 ## API endpoint
 `https://dev.travelbearb2b.com/api/`
 
