@@ -7,6 +7,7 @@
 	- [Receiving an access token](#receiving-an-access-token)
 	- [Token Validation](#token-validation)
 - [Package](#package)
+	- [Service Type](#service-type)
 	- [Package List](#package-list)
 
 ## API endpoint
@@ -58,6 +59,29 @@ Used to check the token validated or not. This API will return the user informat
 ```
 
 ## Package
+### Service Type
+> POST /serviceTypes
+
+### Return 
+```json
+[
+    {
+        "type" : "TUR",
+        "name" : {
+            "en" : "Tour",
+            "zh" : "旅行"
+        }
+    },
+    {
+        "type" : "TIC",
+        "name" : {
+            "en" : "Ticket",
+            "zh" : "門票"
+        }
+    }
+]
+```
+
 ### Package List
 > POST /agent/package
 
