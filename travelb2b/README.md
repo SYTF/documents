@@ -63,7 +63,7 @@ Used to check the token validated or not. This API will return the user informat
 
 #### Body
 | Param | Default | Description |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 |startDate|Start day of current month|Optional. Date for filtering the packages|
 |endDate|End day of current month|Optional. Date for filtering the packages|
 |country|empty|Optional. Filter packages by country code. Please ref. to the country list API.|
