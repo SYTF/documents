@@ -162,7 +162,7 @@ no need to pass anythings
 
 ### Request
 |Param|Default|Description|
-| —————— | —————— | —————— |
+| --- | --- | --- |
 |startDate|Start day of current month|Optional. Date for filtering the packages|
 |endDate|End day of current month|Optional. Date for filtering the packages|
 |country|empty|Optional. Filter packages by country code. Please ref. to the country list API.|
@@ -234,9 +234,9 @@ no need to pass anythings
 ```
 ### Request
 |Param|Default|Description|
-| —————— | —————— | —————— |
-|packageID|String :: Please ref. to the package field (_id).|
-|date|String :: The date of departure with date format YYYY-MM-DD|
+| --- | --- | --- |
+|packageID||String :: Please ref. to the package field (_id).|
+|date||String :: The date of departure with date format YYYY-MM-DD|
 |visitors|[]|Object Array :: Contains all the information about the traveler. Fields are listed below.|
 |visitors.plan|empty|String :: The plan code which selected. ref. to package.plan|
 |visitors.priceType|empty|String :: adult / child|
