@@ -6,14 +6,13 @@
 - [Authenication](#authentication)
 	- [Receiving an access token](#receiving-an-access-token)
 	- [Token Validation](#token-validation)
-- [Package](#package)
-	- [Service Type](#service-type)
-	- [Package List](#package-list)
+- [Package List](#package-list)
+- [Order](#submit-order)
 
-## API endpoint
+## API Endpoint
 `https://www.travelbearb2b.com/api/`
 
---- 
+— 
 
 ## Request Sample
 Making request to our API endpoint is super easy. Please prepare an access token and embed it to the request header. Excluding receiving access token and refresh token endpoint. 
@@ -21,7 +20,7 @@ Making request to our API endpoint is super easy. Please prepare an access token
 ```
 curl -X POST -H “Authorization: Bearer <ACCESS_TOKEN>" https://dev.travelbearb2b.com/api/auth/check
 ```
---- 
+— 
 
 ## Authentication
 ### Receiving an access token
@@ -42,8 +41,19 @@ Most of the APIs are required an access token for authenticating. You can use `u
 }
 ```
 
+### Refresh
+Every access token will be expired in 2 hours. You may request a new one before the token expire. 
+> POST /auth/token/refresh
+
+#### Return
+```json
+{
+	"token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVhNWY4NmIxOTdmYjU4N2NjYzJhMzhiZiIsInVzZXJuYW1lIjoic3V…"
+}
+```
+
 ### Token Validation
-Used to check the token validated or not. This API will return the user information.
+Used to check token validated or not. This API will return the user information.
 >`POST /auth/check`
 
 #### Return
@@ -58,11 +68,76 @@ Used to check the token validated or not. This API will return the user informat
 }
 ```
 
-## Package
-### Service Type
-> POST /serviceTypes
+—
 
-### Return 
+## Packages
+All package related APIs are included. Such as available countries, regions, package types for searching and packages. 
+### Country List
+> POST /location/countries
+
+#### Request
+```json
+{
+    perPage : 10,
+    page : 1```
+#### Return
+```json
+{
+    "totalItems": 1,
+    "totalPage": 1,
+    "currentPage": 1,
+    "data": [
+        {
+            "_id": "5aa155bd602a9c0c1a24cc67",
+            "name": {
+                "en": "Hong Kong",
+                "zh": "香港"
+            },
+            "latlng": [
+                22.25,
+                114.16666666
+            ],
+            "code": "HK",
+            "callingCode": "852",
+            "region": "Asia",
+            "currency": {
+                "code": "HKD",
+                "name": "Hong Kong dollar",
+                "symbol": "$"
+            },
+            "timezone": "UTC+08:00",
+            "cities": [
+                {
+                    "code": "NT",
+                    "name": {
+                        "en": "New Territories",
+                        "zh": " 新界"
+                    }
+                },
+                {
+                    "code": "KL",
+                    "name": {
+                        "en": "Kowloon",
+                        "zh": "九龍半島"
+                    }
+                }
+            ]
+        }
+    ]
+}
+```
+
+## Service Type
+`POST /serviceTypes`
+### Header
+```json
+{
+    "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVhNWY4NmIxOTdmYjU4N2NjYzJhMzhiZiIsInVzZXJuYW1lIjoic3V…"
+}
+```
+### Request
+no need to pass anythings
+### Return Sample
 ```json
 [
     {
@@ -82,20 +157,19 @@ Used to check the token validated or not. This API will return the user informat
 ]
 ```
 
-### Package List
-> POST /agent/package
+## Package List
+`POST /agent/package`
 
-#### Body
-| Param | Default | Description |
-| ------------- | ------------- | ------------- |
+### Request
+|Param|Default|Description|
+| —————— | —————— | —————— |
 |startDate|Start day of current month|Optional. Date for filtering the packages|
 |endDate|End day of current month|Optional. Date for filtering the packages|
 |country|empty|Optional. Filter packages by country code. Please ref. to the country list API.|
 |type|empty|Optional. Filter packages by service type. Please ref. to the service type API.|
 |page|1|Optional. For switching pages|
 |perPage|10|Optional. Control the number of returning items|
-
-#### Return
+### Return Sample
 ```json
 {
     "totalItems": 7,
@@ -141,15 +215,35 @@ Used to check the token validated or not. This API will return the user informat
 }
 ```
 
-### Specific Product [WIP]
-> POST /agent/product/:packageID
-
-#### Return
+## Get Specific Product
+`POST /agent/package/:packageID`
+### Header
 ```json
-	"package" : {
-		"themeCode": "TH-HHQ-TUR-111",
-		"details": [],
-	},
-	"questionnaire" : {
-	}
+{
+    "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVhNWY4NmIxOTdmYjU4N2NjYzJhMzhiZiIsInVzZXJuYW1lIjoic3V…"
+}
 ```
+
+## Submit Order
+`POST /order/submit`
+### Header
+```json
+{
+    "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVhNWY4NmIxOTdmYjU4N2NjYzJhMzhiZiIsInVzZXJuYW1lIjoic3V…"
+}
+```
+### Request
+|Param|Default|Description|
+| —————— | —————— | —————— |
+|packageID|String :: Please ref. to the package field (_id).|
+|date|String :: The date of departure with date format YYYY-MM-DD|
+|visitors|[]|Object Array :: Contains all the information about the traveler. Fields are listed below.|
+|visitors.plan|empty|String :: The plan code which selected. ref. to package.plan|
+|visitors.priceType|empty|String :: adult / child|
+|visitors.questions|[]|Contains the repeat questions only. eg: questions.repeat == true|
+|questions|[]|Object Array :: Contains all the fields of the non-repeat questions. eg: questions.repeat == false |
+|questions.value|empty|String :: The value of each questions.|
+|contactInfo|{}|Object :: An Object for storing contact information. Fields are listed below.|
+|contactInfo.name|empty|String :: The name of contact person.|
+|contactInfo.phoneNumber|empty|String :: The phone number of contact person.|
+|contactInfo.email|empty|String :: The email address of contact person.|
